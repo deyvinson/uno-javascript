@@ -58,28 +58,55 @@
 
             <dialog class="animated fast" id="rulesBox">
                 <div>
-                    <button id="btnCloseRules">X</button>
-                    <h4 id="rulesTitle">Uno Rules</h4>
-                    <!--
-                    <iframe id="video" width="390" height="300" frameborder="0" src="https://www.youtube.com/embed/TdDEGWh9y4Q">
-                    </iframe>-->
-                    <br>
-                    <p>Rules extracted from unorules.com: You can only play a card which has the same color or number
-                        or symbol
-                        with the card in the center. Wild cards (labelled W) are cards that can alter the color during
-                        the
-                        play. Draw Two cards (labelled +2) force the opposing side to draw two cards and forfeit
-                        his/her
-                        turn. Wild Draw Four cards (labelled +4) are basically a wild card and two Draw Two cards. The
-                        opposing
-                        side is forced to draw four cards and forfeit his/her turn. The user can alter the color during
-                        the
-                        play in addition. However, you can only play a Wild Draw Four card if you don't have a card
-                        that
-                        matches the color of the card in the center. Reverse and Skip cards have the same effect in
-                        which
-                        you can play another card because your opponent's side is reversed or skipped.
-                    </p>
+                    <div>
+                        <button id="btnCloseRules">X</button>
+                        <h4 id="rulesTitle" style="text-align:center">UNO RULES</h4>
+                        <p style="text-align:center">Rules extracted from: unorules.com</p>
+                    </div>
+                    <div style="overflow: auto; height: 260px; padding: 0px 10px;">
+                        <br>
+                        <p>You can only play a card which has the same color/number/symbol with the card in the center.</p>
+                        <br>
+                        <p>
+                            <h4>Draw Two Card (+2)</h4>
+                            Draw Two cards (labelled +2) forces the next player to draw two cards and forfeit his/her
+                            turn.
+                        </p>
+                        <br>
+                        <p>
+                            <h4>Reverse Card</h4>
+                            Reverse cards reverses the flow of the game.
+                        </p>
+                        <br>
+                        <p>
+                            <h4>Skip Card</h4>
+                            Skip cards jumps the next player of the cicle, and the player next to him plays.
+                        </p>
+                        <br>
+                        <p>
+                            <h4>Wild Card</h4>
+                            Wild cards are cards that can alter the color during the play.
+                        </p>
+                        <br>
+                        <p>
+                            <h4>Wild Draw Four Card (+4)</h4>
+                            Wild Draw Four cards (labelled +4) are basically a wild card and two Draw Two cards.
+                            The user can alter the color during the play, and the next player is forced to draw four
+                            cards and forfeit his/her turn.
+                        </p>
+                        <br>
+                        <p>
+                            <h4>Counters</h4>
+                            Draw Two cards and Wild Draw Four cards can be stacked if you have a compatible card.
+                            <br>
+                            For example: if a player plays a Draw Two card at you, you can counter with another Draw
+                            Two card, or a Draw Four card. If the player don't have such a card, he/she draws the total
+                            number of draws involved in the process.
+                            <br>
+                            OBS.: A Draw Two card can be stacked with either another Draw Two or a Draw Four.
+                            Otherwise, a Draw Four card can only be stacked with another Draw Four.
+                        </p>
+                    </div>
                 </div>
             </dialog>
 
@@ -183,6 +210,8 @@
 
                 <div class="flow-indicator animated" id="arrow-right" style="background-image: url('images/arrow-right.png')">
                 </div>
+
+                <button id="btnPass">Pass</button>
 
                 <button class="unoButton" id="btnUno"><img src="images/logo.png" style="width: 50px;" /></button>
 
