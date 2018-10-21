@@ -1,6 +1,4 @@
-//window.onload = document.getElementById("menu").open = true;
-
-//function PageLoaded() {
+function PageLoaded() {
 
 //=============== DECLARATIONS ==================================================================================//
 
@@ -257,38 +255,6 @@ function RenderizeCard(card) {
     DrawCardAnimation(card);
 }
 
-
-
-
-//not working yet
-function NewRenderizeCard(card, player) {
-    if (card === tableCard) { card.value = RandomCardValue(10) }
-    else { card.value = RandomCardValue(15) }
-    if (card.value === "plus4" || card.value === "wild") { card.color = "black"; }
-    else { card.color = RandomColor(); }
-
-    let htmlCard = document.createElement("div");
-    htmlCard.setAttribute('class', 'card')
-    htmlCard.setAttribute('class', 'card-' + cardClass[player - 1])
-    htmlCard.setAttribute('id', 'card' + cardID)
-
-    card.id = "card" + cardID;
-
-
-    card.element = htmlCard;
-
-    cardID++;
-
-    htmlCard.style.backgroundColor = card.color;
-    htmlCard.style.boxShadow = "0px 3px 3px rgba(0, 0, 0, 0.8)";
-    htmlCard.style.visibility = "visible";
-    htmlCard.style.backgroundImage = GetImage(card.color, card.value);
-
-    document.querySelector(".card-container-" + player - 1).appendChild(htmlCard);
-    DrawCardAnimation(card);
-}
-
-
 function EraseCard(card) {
     card.style.removeProperty('transition');
     card.style.removeProperty('transform');
@@ -297,20 +263,6 @@ function EraseCard(card) {
     card.style.backgroundImage = null;
     card.style.visibility = "hidden";
 }
-
-
-//not working yet
-function NewEraseCard(card) {
-    card.style.removeProperty('transition');
-    card.style.removeProperty('transform');
-    card.innerHTML = "";
-    card.style.backgroundColor = null;
-    card.style.backgroundImage = null;
-    card.style.visibility = "hidden";
-}
-
-
-
 
 
 
@@ -1056,4 +1008,4 @@ function ShowLabel(text) {
 
     //soundMenuSelection.play();
 }
-//}
+}
