@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>UNO Card Game - Play Uno online</title>
+    <link href="css.css" rel="stylesheet">
+    <link href="cards.css" rel="stylesheet">
+    <link href="animate.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+</head>
+
+<body onload="PageLoaded()">
+
+    <div class="main-container">
+
+        <div id="content">
+
+            <dialog id="layer">
+                <div></div>
+            </dialog>
+
+            <dialog class="animated faster" id="optionsBox">
+                <h4 id="optionsTitle" style="margin-top: 10px;">Options</h4>
+                <div>
+                    <button class="commonButton" id="optPlayMusic">Music: off</button>
+                    <br>
+                    <button id="btnCloseOptions">Close</button>
+                    <br>
+                </div>
+
+            </dialog>
+
+            <dialog class="animated fast bounceIn" id="titleScreen">
+                <div>
+                    <img src="images/logo.png" style="width: 300px; padding-bottom: 40px;" />
+                    <br>
+                    <button class="commonButton" id="btnPlayGame">Play Game</button>
+                    <br>
+                    <button class="commonButton" id="btnRules">Rules</button>
+                    <br>
+                    <button class="commonButton" id="playMusic">Music: off</button>
+                    <br>
+                </div>
+            </dialog>
+
+
+            <dialog class="animated faster" id="menu">
+                <div>
+                    <h1 id="endGameTitle"></h1>
+                    <button id="btnPlayAgain">Play Again</button>
+                </div>
+            </dialog>
+
+            <dialog class="animated fast" id="rulesBox">
+                <div>
+                    <button id="btnCloseRules">X</button>
+                    <h4 id="rulesTitle">Uno Rules</h4>
+                    <!--
+                    <iframe id="video" width="390" height="300" frameborder="0" src="https://www.youtube.com/embed/TdDEGWh9y4Q">
+                    </iframe>-->
+                    <br>
+                    <p>Rules extracted from unorules.com: You can only play a card which has the same color or number
+                        or symbol
+                        with the card in the center. Wild cards (labelled W) are cards that can alter the color during
+                        the
+                        play. Draw Two cards (labelled +2) force the opposing side to draw two cards and forfeit
+                        his/her
+                        turn. Wild Draw Four cards (labelled +4) are basically a wild card and two Draw Two cards. The
+                        opposing
+                        side is forced to draw four cards and forfeit his/her turn. The user can alter the color during
+                        the
+                        play in addition. However, you can only play a Wild Draw Four card if you don't have a card
+                        that
+                        matches the color of the card in the center. Reverse and Skip cards have the same effect in
+                        which
+                        you can play another card because your opponent's side is reversed or skipped.
+                    </p>
+                </div>
+            </dialog>
+
+            <dialog class="animated faster" id="colorSelector">
+                <div>
+                    <h4 id="dialogTitle">Choose your color</h4>
+                    <button id="btnBlue">blue</button>
+                    <button id="btnGreen">green</button>
+                    <button id="btnRed">red</button>
+                    <button id="btnYellow">yellow</button>
+                </div>
+            </dialog>
+
+            <div class="card-container card-container-top">
+                <div class="card card-top" id=player3-slot19></div>
+                <div class="card card-top" id=player3-slot17></div>
+                <div class="card card-top" id=player3-slot15></div>
+                <div class="card card-top" id=player3-slot13></div>
+                <div class="card card-top" id=player3-slot11></div>
+                <div class="card card-top" id=player3-slot9></div>
+                <div class="card card-top" id=player3-slot7></div>
+                <div class="card card-top" id=player3-slot5></div>
+                <div class="card card-top" id=player3-slot3></div>
+                <div class="card card-top" id=player3-slot1></div>
+                <div class="card card-top" id=player3-slot0></div>
+                <div class="card card-top" id=player3-slot2></div>
+                <div class="card card-top" id=player3-slot4></div>
+                <div class="card card-top" id=player3-slot6></div>
+                <div class="card card-top" id=player3-slot8></div>
+                <div class="card card-top" id=player3-slot10></div>
+                <div class="card card-top" id=player3-slot12></div>
+                <div class="card card-top" id=player3-slot14></div>
+                <div class="card card-top" id=player3-slot16></div>
+                <div class="card card-top" id=player3-slot18></div>
+
+            </div>
+
+            <div class="middle-container">
+
+                <div class="score" id="playerTopScore">
+                    <span><img id="playerTopImg" src="images/player.png" class="player-image"></span><br>
+                    <span id="playerTopLabel">Susan</span>
+                    <span class="counter" id="playerTop-counter">0</span></div>
+
+                <div class="score" id="playerLeftScore">
+                    <span><img id="playerLeftImg" src="images/player.png" class="player-image"></span><br>
+                    <span id="playerLeftLabel">Tobias</span>
+                    <span class="counter" id="playerLeft-counter">0</span></div>
+
+                <div class="score" id="playerRightScore">
+                    <span><img id="playerRightImg" src="images/player.png" class="player-image"></span><br>
+                    <span id="playerRightLabel">Joseph</span>
+                    <span class="counter" id="playerRight-counter">0</span></div>
+
+                <div class="score" id="playerBottomScore">
+                    <span><img id="playerBottomImg" src="images/player.png" class="player-image"></span><br>
+                    <span id="playerBottomLabel">You</span>
+                    <span class="counter" id="playerBottom-counter">0</span></div>
+
+                <p class="animated faster" id="hint">This is a hint message.</p>
+                <p class="animated faster" id="label">This is a label for impact actions.</p>
+
+                <div class="card-container card-container-left">
+                    <div class="card card-left" id="player2-slot19"></div>
+                    <div class="card card-left" id="player2-slot17"></div>
+                    <div class="card card-left" id="player2-slot15"></div>
+                    <div class="card card-left" id="player2-slot13"></div>
+                    <div class="card card-left" id="player2-slot11"></div>
+                    <div class="card card-left" id="player2-slot9"></div>
+                    <div class="card card-left" id="player2-slot7"></div>
+                    <div class="card card-left" id="player2-slot5"></div>
+                    <div class="card card-left" id="player2-slot3"></div>
+                    <div class="card card-left" id="player2-slot1"></div>
+                    <div class="card card-left" id="player2-slot0"></div>
+                    <div class="card card-left" id="player2-slot2"></div>
+                    <div class="card card-left" id="player2-slot4"></div>
+                    <div class="card card-left" id="player2-slot6"></div>
+                    <div class="card card-left" id="player2-slot8"></div>
+                    <div class="card card-left" id="player2-slot10"></div>
+                    <div class="card card-left" id="player2-slot12"></div>
+                    <div class="card card-left" id="player2-slot14"></div>
+                    <div class="card card-left" id="player2-slot16"></div>
+                    <div class="card card-left" id="player2-slot18"></div>
+                </div>
+
+                <div class="action-player animated faster" id="action-player1"></div>
+                <div class="action-player animated faster" id="action-player2"></div>
+                <div class="action-player animated faster" id="action-player3"></div>
+                <div class="action-player animated faster" id="action-player4"></div>
+
+                <div class="player-indicator" id="player1-indicator" style="background-image: url(images/triangle-down.png);"></div>
+                <div class="player-indicator" id="player2-indicator" style="background-image: url(images/triangle-left.png);"></div>
+                <div class="player-indicator" id="player3-indicator" style="background-image: url(images/triangle-up.png);"></div>
+                <div class="player-indicator" id="player4-indicator" style="background-image: url(images/triangle-right.png);"></div>
+
+                <div class="flow-indicator animated" id="arrow-left" style="background-image: url('images/arrow-left.png')">
+                </div>
+
+                <div class="" id=tableCard></div>
+                <div class="animated fast" id=deck title="Draw Card"></div>
+
+                <div class="flow-indicator animated" id="arrow-right" style="background-image: url('images/arrow-right.png')">
+                </div>
+
+                <button class="unoButton" id="btnUno"><img src="images/logo.png" style="width: 50px;" /></button>
+
+                <div class="card-container card-container-right">
+                    <div class="card card-right" id="player4-slot19"></div>
+                    <div class="card card-right" id="player4-slot17"></div>
+                    <div class="card card-right" id="player4-slot15"></div>
+                    <div class="card card-right" id="player4-slot13"></div>
+                    <div class="card card-right" id="player4-slot11"></div>
+                    <div class="card card-right" id="player4-slot9"></div>
+                    <div class="card card-right" id="player4-slot7"></div>
+                    <div class="card card-right" id="player4-slot5"></div>
+                    <div class="card card-right" id="player4-slot3"></div>
+                    <div class="card card-right" id="player4-slot1"></div>
+                    <div class="card card-right" id="player4-slot0"></div>
+                    <div class="card card-right" id="player4-slot2"></div>
+                    <div class="card card-right" id="player4-slot4"></div>
+                    <div class="card card-right" id="player4-slot6"></div>
+                    <div class="card card-right" id="player4-slot8"></div>
+                    <div class="card card-right" id="player4-slot10"></div>
+                    <div class="card card-right" id="player4-slot12"></div>
+                    <div class="card card-right" id="player4-slot14"></div>
+                    <div class="card card-right" id="player4-slot16"></div>
+                    <div class="card card-right" id="player4-slot18"></div>
+                </div>
+            </div>
+
+            <div class="card-container card-container-bottom">
+                <div class="card card-bottom" id="player1-slot19"></div>
+                <div class="card card-bottom" id="player1-slot17"></div>
+                <div class="card card-bottom" id="player1-slot15"></div>
+                <div class="card card-bottom" id="player1-slot13"></div>
+                <div class="card card-bottom" id="player1-slot11"></div>
+                <div class="card card-bottom" id="player1-slot9"></div>
+                <div class="card card-bottom" id="player1-slot7"></div>
+                <div class="card card-bottom" id="player1-slot5"></div>
+                <div class="card card-bottom" id="player1-slot3"></div>
+                <div class="card card-bottom" id="player1-slot1"></div>
+                <div class="card card-bottom" id="player1-slot0"></div>
+                <div class="card card-bottom" id="player1-slot2"></div>
+                <div class="card card-bottom" id="player1-slot4"></div>
+                <div class="card card-bottom" id="player1-slot6"></div>
+                <div class="card card-bottom" id="player1-slot8"></div>
+                <div class="card card-bottom" id="player1-slot10"></div>
+                <div class="card card-bottom" id="player1-slot12"></div>
+                <div class="card card-bottom" id="player1-slot14"></div>
+                <div class="card card-bottom" id="player1-slot16"></div>
+                <div class="card card-bottom" id="player1-slot18"></div>
+            </div>
+
+            <button id="btnOptions">Options</button>
+
+        </div>
+
+        <script src="javascript.js"></script>
+
+</body>
+
+</html>

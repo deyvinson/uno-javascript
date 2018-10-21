@@ -1,0 +1,477 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #272727;
+    /*background-image: url("background.jpg");*/
+    background-size: 100%;
+    margin: auto;
+    text-align: center;
+    user-select: none;
+}
+
+dialog {
+    width: 500px;
+    height: 500px;
+    border: none;
+    border-radius: 4px;
+    margin-top: 60px;
+    text-align: center;
+    background-color: #013249e7;
+    color: white;
+}
+
+.main-container {
+    font-weight: bold;
+    width: 1024px;
+    height: 630px;
+    margin: auto;
+    overflow: hidden;
+    margin-top: 5px;
+    text-align: center;
+}
+
+#content {
+    background-color: #024b6dd0;
+    background-image: url("images/background.jpg");
+    width: 99.8%;
+    float: left;
+    height: 99%;
+    font-size: 25px;
+    text-align: center;
+    overflow: hidden;
+    border: 1px solid black;
+    border-radius: 50px;
+}
+
+.middle-container {
+    width: 100%;
+    height: 440px;
+    clear: right;
+}
+
+.card-container {
+    /*clear: left;*/
+    margin-left: 12.5%;
+    width: 768px;
+    height: 92px;
+    /*border: 1px solid #0000008e;*/
+    border-radius: 5px;
+}
+
+.card-container-top {
+    margin-top: -15px;
+}
+
+.card-container-bottom {
+    clear: left;
+    /*padding-top: 30px;*/
+}
+
+.card-container-left {
+    float: left;
+    margin-left: -13px;
+    margin-top: 20px;
+    width: 92px;
+    height: 410px;
+    padding: 0;
+    /*clear: both;*/
+}
+
+.card-container-right {
+    float: right;
+    width: 92px;
+    height: 410px;
+    margin: 0;
+    margin-right: -14px;
+    margin-top: 20px;
+}
+
+#layer {
+    background-color: transparent;
+    width: 970px;
+    height: 573px;
+    margin-top: 1px;
+}
+
+/*DIALOGS*/
+
+#titleScreen {
+    background-color: transparent;
+    text-align: center;
+    padding: 5px;
+}
+
+#dialogTitle {
+    margin: 0 0 20px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+}
+
+#optionsBox{
+    height: 140px;
+    width: 250px;
+    margin-top: 240px;
+    padding-top: 0;
+    background-color: #013249;
+}
+
+#colorSelector {
+    width: 270px;
+    height: 120px;
+    background-color: #013249;
+    text-align: center;
+    margin-top: 225px;
+    border: none;
+}
+
+#menu {
+    width: 470px;
+    height: 300px;
+    margin-top: 140px;
+    color: white;
+    background-color: #013249;
+    border: none;
+    border-bottom-left-radius: 50% 50%;
+    border-bottom-right-radius: 50% 50%;
+    border-top-left-radius: 50% 50%;
+    border-top-right-radius: 50% 50%;
+}
+
+#menu h1 {
+    margin: 60px 0;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    ;
+}
+
+#rulesBox {
+    width: 400px;
+    height: 350px;
+    margin-top: 100px;
+    padding: 5px;
+    color: white;
+    background-color: #013249;
+    overflow: auto;
+    font-size: 12px;
+    font-weight: lighter;
+}
+
+#rulesBox h4 {
+    margin: 5px 0;
+    text-align: center;
+}
+
+.score {
+    position: fixed;
+    float: left;
+    color: rgba(255, 255, 255, 0.63);
+    font-size: 14px;
+    font-weight: lighter;
+    margin: 295px 0 0 10px;
+    user-select: none;
+    text-align: center;
+
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.score img{
+    width: 45px;
+    height: 45px;
+    border: 3px solid;
+    border-radius: 6px;
+    box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.8);
+    
+}
+
+#playerBottomScore{
+    margin: 390px 0px 0px 300px;
+}
+
+#playerRightScore{
+    margin: 320px 0px 0px 875px;
+}
+
+#playerLeftScore{
+    margin: 80px 0px 0px 100px;
+}
+
+#playerTopScore{
+    margin: 10px 0px 0px 650px;
+}
+
+.counter{
+    background-color: rgba(255, 255, 255, 0.26);
+    color: white;
+    font-weight: bolder;
+    border-radius: 20px;
+    padding: 0px 6px 0px 6px;
+}
+
+
+#label{
+    position: absolute;
+    float: left;
+    width: 750px;
+    font-size: 60px;
+    margin-top: 190px;
+    margin-left: 135px;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    visibility: hidden;
+}
+
+#hint {
+    position: absolute;
+    width: 1024px;
+    float: left;
+    clear: left;
+    margin: 450px 0 0 0px;
+    font-size: 11px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.63);
+    visibility: hidden;
+}
+
+.flow-indicator {
+    float: left;
+    height: 220px;
+    width: 100px;
+    margin-top: 120px;
+    margin-left: 15px;
+    margin-right: 15px;
+    opacity: 0;
+    background-size: 100%;
+    transition: opacity 0.15s, transform 0.5s;
+}
+
+#arrow-left {
+    margin-left: 222px;
+}
+
+#action-player1 {
+    margin-top: 375px;
+    margin-left: 472px;
+}
+
+#action-player2 {
+    margin-left: 95px;
+}
+
+#action-player3 {
+    margin-top: 15px;
+    margin-left: 472px;
+}
+
+#action-player4 {
+    margin-left: 848px;
+}
+
+.action-player {
+    position: absolute;
+    float: left;
+    width: 80px;
+    height: 80px;
+    font-size: 50px;
+    color: white;
+    font-weight: bold;
+    margin-top: 180px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.player-indicator{
+    position: absolute;
+    float: left;
+    width: 35px;
+    height: 35px;
+    background-size: 100%;
+    visibility: hidden;
+}
+
+#player1-indicator {
+    height: 30px;
+    margin-top: 350px;
+    margin-left: 490px;
+}
+
+#player2-indicator {
+    width: 30px;
+    
+    margin-top: 210px;
+    margin-left: 230px;
+}
+
+#player3-indicator {
+    height: 30px;
+    
+    margin-top: 65px;
+    margin-left: 490px;
+}
+
+#player4-indicator {
+    width: 30px;
+    
+    margin-top: 210px;
+    margin-left: 760px;
+}
+
+
+
+.action-player, .card-container {
+    /*background-color: #0132495d;*/
+}
+
+/* BUTTONS */
+
+button {
+    margin: 5px 0px;
+    font-size: 20px;
+    border-radius: 4px;
+    font-weight: lighter;
+    background-color: rgb(212, 0, 0);
+    border: 1px solid white;
+    color: white;
+    padding: 5px;
+    width: 250px;
+    box-shadow: 1px 9px 11px rgba(0, 0, 0, 1);
+    transition: transform 0.15s;
+}
+
+.commonButton:hover {
+    background-color: rgb(255, 204, 0);
+    transform: scale(1.1)
+}
+
+.commonButton:active {
+    background-color: rgb(204, 164, 2);
+}
+
+button:focus {
+    outline: 0;
+}
+
+#btnCloseRules {
+    float: right;
+    border: none;
+    padding: 0px;
+    margin: 3px;
+    background-color: transparent;
+}
+
+#btnCloseRules:hover {
+    color: red;
+}
+
+#btnPlayAgain {
+    width: 200px;
+    background-color: rgb(212, 0, 0);
+    border: 2px solid white;
+    font-size: 25px;
+    transition: transform 0.15s;
+}
+
+#btnPlayAgain:hover {
+    transform: scale(1.1);
+}
+
+#btnPlayAgain:active {
+    background-color: rgb(168, 3, 3);
+}
+
+#colorSelector button {
+    width: 60px;
+    height: 60px;
+    margin: 0;
+    font-size: 0;
+}
+
+#btnBlue {
+    background-color: rgb(42, 127, 255);
+}
+
+#btnBlue:hover {
+    background-color: rgb(98, 161, 255);
+}
+
+#btnBlue:active {
+    background-color: rgb(32, 92, 184);
+}
+
+#btnGreen {
+    background-color: rgb(44, 160, 90);
+}
+
+#btnGreen:hover {
+    background-color: rgb(70, 196, 120);
+}
+
+#btnGreen:active {
+    background-color: rgb(31, 122, 67);
+}
+
+#btnRed {
+    background-color: rgb(212, 0, 0);
+}
+
+#btnRed:hover {
+    background-color: rgb(247, 40, 40);
+}
+
+#btnRed:active {
+    background-color: rgb(168, 3, 3);
+}
+
+#btnYellow {
+    background-color: rgb(255, 204, 0);
+}
+
+#btnYellow:hover {
+    background-color: rgb(255, 224, 100);
+}
+
+#btnYellow:active {
+    background-color: rgb(204, 164, 2);
+}
+
+.unoButton{
+    position: absolute;
+    float: left;
+    width: 65px;
+    height: 65px;
+    border-radius: 33px;
+    background-color: #ed151f;
+    margin-top: 365px;
+    margin-left: -200px;
+    opacity: 0;
+    transition: opacity 0.15s, transform 0.15s;
+}
+
+.unoButton:hover{
+    background-color: #ed151f;
+    transform: scale(1.1)
+}
+
+.unoButton:active{
+    background-color: #b10e16;
+}
+
+#btnOptions{
+    float: right;
+    font-size: 14px;
+    margin-top: -42px;
+    margin-right: 31px;
+    width: 70px;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+#btnOptions:hover{
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+
+#btnCloseOptions{
+    background-color: transparent;
+    border: none;
+    font-size: 14px;
+    box-shadow: none;
+
+}

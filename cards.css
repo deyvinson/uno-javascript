@@ -1,0 +1,86 @@
+.card {
+    float: left;
+    margin: 0px 0px 0px -28px;
+    width: 65px;
+    height: 92px;
+    border-radius: 6px;
+    background-size: 100%;
+    font-size: 0;
+    visibility: hidden;
+}
+
+.card-bottom:hover {
+    transition: transform 0.15s;
+    transform: translateY(-15px);
+}
+
+.card-bottom:not(:hover) {
+    transform: initial;
+}
+
+.card-top {
+    margin-top: 0px;
+}
+
+#tableCard, #deck {
+    width: 85px;
+    height: 120px;
+    border-radius: 7px;
+    margin-top: 175px;
+    margin-bottom: 175px;
+    font-size: 0;
+    background-size: 100%;
+    transition: bottom 0.1s;
+}
+
+#tableCard {
+    /*clear: left;*/
+    float: left;
+}
+
+#deck {
+    float: left;
+    margin-left: 20px;
+    background-image: url("cards/back.png");
+    box-shadow: 2px 2px 1px #9e9e9e;
+    cursor: -webkit-grab;
+    visibility: hidden;
+    /*box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);*/
+}
+
+#deck:hover {
+    transform: scale(1.1);
+    transition: opacity 0.15s, transform 0.15s;
+}
+
+#deck:not(:hover) {
+    transform: initial;
+    transition: opacity 0.15s, transform 0.15s;
+}
+
+.card-left{
+    transform: rotate(90deg);
+    margin: 0;
+    margin-left: 12px; 
+    margin-top: -74px;
+    float: left;
+}
+
+.card-right{
+    transform: rotate(-90deg);
+    margin: 0;
+    margin-left: 15px;
+    margin-top: -74px;
+}
+
+#player2-slot19{
+    margin-top: -12px;
+}
+#player4-slot19{
+    margin-top: -13px;
+}
+
+/*.card-container-left .card, .card-container-right .card{
+    background-image: url("cards/back.png");
+    visibility: visible;
+}*/
