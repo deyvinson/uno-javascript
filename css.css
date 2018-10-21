@@ -1,6 +1,6 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #272727;
+    background-color: #013249;
     /*background-image: url("background.jpg");*/
     background-size: 100%;
     margin: auto;
@@ -149,14 +149,14 @@ dialog {
     padding: 5px;
     color: white;
     background-color: #013249;
-    overflow: auto;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: lighter;
+    text-align: justify;
 }
 
 #rulesBox h4 {
     margin: 5px 0;
-    text-align: center;
+    text-align: left;
 }
 
 .score {
@@ -349,11 +349,13 @@ button:focus {
 }
 
 #btnCloseRules {
-    float: right;
+    float: left;
     border: none;
     padding: 0px;
     margin: 3px;
     background-color: transparent;
+    box-shadow: none;
+    width: 14px;
 }
 
 #btnCloseRules:hover {
@@ -474,4 +476,25 @@ button:focus {
     font-size: 14px;
     box-shadow: none;
 
+}
+
+#btnPass{
+    float: left;
+    position: fixed;
+    margin: 403px 0px 0px -510px;
+    width: 70px;
+    font-size: 15px;
+    background-color: rgb(212, 0, 0);
+    border: 1px solid rgb(255, 98, 98);
+    opacity: 0;
+    transition: opacity 0.15s;
+}
+
+#btnPass:hover{
+    filter: brightness(200%);
+}
+
+#btnPass:active{
+    filter: initial;
+    background-color: rgb(148, 1, 1);
 }

@@ -1,4 +1,6 @@
-function PageLoaded() {
+//window.onload = document.getElementById("menu").open = true;
+
+//function PageLoaded() {
 
 //=============== DECLARATIONS ==================================================================================//
 
@@ -41,6 +43,7 @@ var indicatorPlayer1 = document.getElementById("player1-indicator")
 var indicatorPlayer2 = document.getElementById("player2-indicator")
 var indicatorPlayer3 = document.getElementById("player3-indicator")
 var indicatorPlayer4 = document.getElementById("player4-indicator")
+var btnPass = document.getElementById("btnPass")
 //in game card colors
 var cardBlue = "rgb(42, 127, 255)"
 var cardGreen = "rgb(44, 160, 90)"
@@ -55,7 +58,6 @@ var cardYellow = "rgb(255, 204, 0)"
 
 
 function FirstToPlay() {
-
     document.getElementById("playerBottomImg").style.borderColor = cardRed;
     document.getElementById("playerLeftImg").style.borderColor = cardGreen;
     document.getElementById("playerTopImg").style.borderColor = cardYellow;
@@ -64,9 +66,6 @@ function FirstToPlay() {
     document.getElementById("playerLeftScore").style.opacity = 1;
     document.getElementById("playerRightScore").style.opacity = 1;
     document.getElementById("playerBottomScore").style.opacity = 1;
-
-
-
     document.getElementById("layer").open = true;
     var c1 = document.getElementById("player1-slot0");
     var c2 = document.getElementById("player2-slot0");
@@ -99,7 +98,7 @@ function FirstToPlay() {
         }
         else { draw = true }
 
-        setTimeout(function () { ShowLabel("PLAYER " + player + " BEGINS!") }, 1000)
+        setTimeout(function () { ShowLabel("PLAYER " + startingPlayer + " BEGINS!") }, 1000)
 
     }
     while (draw === true);
@@ -206,8 +205,7 @@ function StartGame() {
     }, 5300);
 
     setTimeout(function () {
-        player = startingPlayer; plus2counter = 0; plus4counter = 0;
-        CallPlayer(player)
+        player = startingPlayer; plus2counter = 0; plus4counter = 0; CallPlayer(player);
     }, 5600);
 }
 
@@ -255,6 +253,38 @@ function RenderizeCard(card) {
     DrawCardAnimation(card);
 }
 
+
+
+
+//not working yet
+function NewRenderizeCard(card, player) {
+    if (card === tableCard) { card.value = RandomCardValue(10) }
+    else { card.value = RandomCardValue(15) }
+    if (card.value === "plus4" || card.value === "wild") { card.color = "black"; }
+    else { card.color = RandomColor(); }
+
+    let htmlCard = document.createElement("div");
+    htmlCard.setAttribute('class', 'card')
+    htmlCard.setAttribute('class', 'card-' + cardClass[player - 1])
+    htmlCard.setAttribute('id', 'card' + cardID)
+
+    card.id = "card" + cardID;
+
+
+    card.element = htmlCard;
+
+    cardID++;
+
+    htmlCard.style.backgroundColor = card.color;
+    htmlCard.style.boxShadow = "0px 3px 3px rgba(0, 0, 0, 0.8)";
+    htmlCard.style.visibility = "visible";
+    htmlCard.style.backgroundImage = GetImage(card.color, card.value);
+
+    document.querySelector(".card-container-" + player - 1).appendChild(htmlCard);
+    DrawCardAnimation(card);
+}
+
+
 function EraseCard(card) {
     card.style.removeProperty('transition');
     card.style.removeProperty('transform');
@@ -263,6 +293,20 @@ function EraseCard(card) {
     card.style.backgroundImage = null;
     card.style.visibility = "hidden";
 }
+
+
+//not working yet
+function NewEraseCard(card) {
+    card.style.removeProperty('transition');
+    card.style.removeProperty('transform');
+    card.innerHTML = "";
+    card.style.backgroundColor = null;
+    card.style.backgroundImage = null;
+    card.style.visibility = "hidden";
+}
+
+
+
 
 
 
@@ -416,7 +460,21 @@ function CPUSetCard(card) {
     }
 }
 
-
+function DeckClick() {
+    debugger
+    if (counter === 0) {
+        DrawCard(player, 1);
+        if (HasPlayableCards()) {
+            if (player === 1) {
+                counter = 1; HighlightPlayableCards();
+                setTimeout(function () { btnPass.style.opacity = "1"; }, 400)
+            }
+            else { setTimeout(CPUPlay, 700) }
+        }
+        else { CallNextPlayer() }
+    }
+    else (Hint("You can only draw once."))
+}
 
 function DrawCard(player, numberOfCards) {
     debugger
@@ -462,18 +520,7 @@ function GetColor(e) {
 
 
 
-function DeckClick() {
-    debugger
-    if (counter === 0) {
-        DrawCard(player, 1);
-        if (HasPlayableCards()) {
-            if (player === 1) { counter = 1; HighlightPlayableCards(); }
-            else { setTimeout(CPUPlay, 700) }
-        }
-        else { CallNextPlayer() }
-    }
-    else (Hint("You can only draw once."))
-}
+
 
 
 
@@ -532,6 +579,7 @@ function CallNextPlayer() {
     else {
         if (player > 1) { player-- } else { player = 4 }
     }
+    counter = 0;
     CallPlayer(player);
 }
 
@@ -789,7 +837,11 @@ document.getElementById("btnUno").addEventListener("click", function () {
     Hint("This don't work yet!")
 })
 
-
+//Pass Button
+btnPass.addEventListener("click", function () {
+    CallNextPlayer();
+    btnPass.style.opacity = "0";
+})
 
 
 
@@ -1005,7 +1057,5 @@ function ShowLabel(text) {
         label.style.visibility = "hidden";
         label.innerHTML = "";
     }, 1100)
-
-    //soundMenuSelection.play();
 }
-}
+//}
