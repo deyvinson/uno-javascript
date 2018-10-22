@@ -15,7 +15,7 @@ function PageLoaded() {
     var tableCard = { color: "", value: "", element: document.getElementById("tableCard") }
     var counter = 0;
     //players
-    var player = 1;
+    var player;
     var startingPlayer = 1;
     var player1win = 0;
     var player2win = 0;
@@ -35,6 +35,7 @@ function PageLoaded() {
     var soundReverse = new Audio("sound/reverse.wav")
     var soundVictory = new Audio("sound/victory.flac")
     var soundDraw = new Audio("sound/draw.mp3")
+    var soundLose = new Audio("sound/lose.mp3")
 
     //elements
     var arrowLeft = document.querySelectorAll(".flow-indicator")[0]
@@ -50,7 +51,10 @@ function PageLoaded() {
     var cardRed = "rgb(212, 0, 0)"
     var cardYellow = "rgb(255, 204, 0)"
 
-
+    var player1Name = document.getElementById("playerBottomLabel")
+    var player2Name = document.getElementById("playerLeftLabel")
+    var player3Name = document.getElementById("playerTopLabel")
+    var player4Name = document.getElementById("playerRightLabel")
 
 
     //=============== MAIN FUNCTIONS ================================================================================//
@@ -83,22 +87,23 @@ function PageLoaded() {
             var P2Value = GetValueOfCard(c2)
             var P3Value = GetValueOfCard(c3)
             var P4Value = GetValueOfCard(c4)
+            var name
 
             if (P1Value > P2Value && P1Value > P3Value && P1Value > P4Value) {
-                startingPlayer = 1; draw = false;
+                startingPlayer = 1; draw = false; name = player1Name.innerHTML + " BEGIN!";
             }
             else if (P2Value > P1Value && P2Value > P3Value && P2Value > P4Value) {
-                startingPlayer = 2; draw = false
+                startingPlayer = 2; draw = false; name = player2Name.innerHTML + " BEGINS!";
             }
             else if (P3Value > P1Value && P3Value > P2Value && P3Value > P4Value) {
-                startingPlayer = 3; draw = false
+                startingPlayer = 3; draw = false; name = player3Name.innerHTML + " BEGINS!";
             }
             else if (P4Value > P1Value && P4Value > P2Value && P4Value > P3Value) {
-                startingPlayer = 4; draw = false
+                startingPlayer = 4; draw = false; name = player4Name.innerHTML + " BEGINS!";
             }
             else { draw = true }
 
-            setTimeout(function () { ShowLabel("PLAYER " + startingPlayer + " BEGINS!") }, 1000)
+            setTimeout(function () { ShowLabel(name.toUpperCase()) }, 1000)
 
         }
         while (draw === true);
@@ -212,7 +217,7 @@ function PageLoaded() {
 
 
     function EndGame() {
-        //debugger
+        
         RemoveHighlight();
         document.getElementById("layer").open = true;
         arrowLeft.style.opacity = "0"; arrowRight.style.opacity = "0";
@@ -221,13 +226,19 @@ function PageLoaded() {
         indicatorPlayer3.style.visibility = "hidden";
         indicatorPlayer4.style.visibility = "hidden";
 
-        var text = "PLAYER " + player + " WON!";
+        if (player === 1){soundVictory.play();}
+        else {soundLose.play();}
+
+
+        debugger
+        var winner;
+        if (player === 1) { document.getElementById("menu").style.color = cardRed; player1win++; winner = player1Name.innerHTML }
+        else if (player === 2) { document.getElementById("menu").style.color = cardGreen; player2win++; winner = player2Name.innerHTML  }
+        else if (player === 3) { document.getElementById("menu").style.color = cardYellow; player3win++; winner = player3Name.innerHTML  }
+        else { document.getElementById("menu").style.color = cardBlue; player4win++; winner = player4Name.innerHTML  }
+
+        var text = winner.toUpperCase() + " WON!";
         document.getElementById("endGameTitle").innerHTML = text;
-        soundVictory.play();
-        if (player === 1) { document.getElementById("menu").style.color = cardRed; player1win++ }
-        else if (player === 2) { document.getElementById("menu").style.color = cardGreen; player2win++ }
-        else if (player === 3) { document.getElementById("menu").style.color = cardYellow; player3win++ }
-        else { document.getElementById("menu").style.color = cardBlue; player4win++ }
 
         document.getElementById("menu").open = true;
         document.getElementById("menu").classList.add('zoomIn');
@@ -264,6 +275,50 @@ function PageLoaded() {
     }
 
 
+    
+    //not working yet
+    function NewRenderizeCard(card, player) {
+        if (card === tableCard) { card.value = RandomCardValue(10) }
+        else { card.value = RandomCardValue(15) }
+        if (card.value === "plus4" || card.value === "wild") { card.color = "black"; }
+        else { card.color = RandomColor(); }
+
+        let htmlCard = document.createElement("div");
+        htmlCard.setAttribute('class', 'card')
+        htmlCard.setAttribute('class', 'card-' + cardClass[player - 1])
+        htmlCard.setAttribute('id', 'card' + cardID)
+
+        card.id = "card" + cardID;
+
+
+        card.element = htmlCard;
+
+        cardID++;
+
+        htmlCard.style.backgroundColor = card.color;
+        htmlCard.style.boxShadow = "0px 3px 3px rgba(0, 0, 0, 0.8)";
+        htmlCard.style.visibility = "visible";
+        htmlCard.style.backgroundImage = GetImage(card.color, card.value);
+
+        document.querySelector(".card-container-" + player - 1).appendChild(htmlCard);
+        DrawCardAnimation(card);
+    }
+
+
+    //not working yet
+    function NewEraseCard(card) {
+        card.style.removeProperty('transition');
+        card.style.removeProperty('transform');
+        card.innerHTML = "";
+        card.style.backgroundColor = null;
+        card.style.backgroundImage = null;
+        card.style.visibility = "hidden";
+    }
+
+
+
+
+
 
     //=============== PLAYING ACTIONS ===============================================================================//
 
@@ -293,8 +348,8 @@ function PageLoaded() {
             setTimeout(function () {
                 let draw = (plus2counter * 2) + (plus4counter * 4);
                 DrawCard(player, draw); plus4counter = 0; plus2counter = 0;
-                PlayerAction(player, "+" + draw)
                 soundDraw.play();
+                PlayerAction(player, "+" + draw)    
                 CallNextPlayer();
             }, 800)
 
@@ -322,13 +377,9 @@ function PageLoaded() {
     }
 
 
-
-
-
-
-
     function SetCard(card) {
         counter = 0;
+        btnPass.style.opacity = 0;
         var tc = document.getElementById("tableCard");
         tc.innerHTML = card.innerHTML;
         tc.style.backgroundColor = card.style.backgroundColor;
@@ -356,8 +407,8 @@ function PageLoaded() {
                         PlayerAction(player, "skip")
                     }
                     if (IsReverse(tc)) {
-                        ReverseFlow(); RemoveHighlight(); ShowLabel("REVERSE!");
                         soundReverse.pause(); soundReverse.currentTime = 0; soundReverse.play();
+                        ReverseFlow(); RemoveHighlight(); ShowLabel("REVERSE!");
                     }
                     if (IsPlus2(tc)) { plus2counter++; }
 
@@ -405,8 +456,8 @@ function PageLoaded() {
                         PlayerAction(player, "skip")
                     }
                     if (IsReverse(tc)) {
-                        ReverseFlow(); ShowLabel("REVERSE!");
                         soundReverse.pause(); soundReverse.currentTime = 0; soundReverse.play();
+                        ReverseFlow(); ShowLabel("REVERSE!");
                     }
                     if (IsPlus2(tc)) { plus2counter++; }
                     CallNextPlayer();
@@ -757,6 +808,7 @@ function PageLoaded() {
 
     //Menu for choosing color
     function ColorChooseMenu() {
+        RemoveHighlight();
         document.getElementById("layer").open = true
         document.getElementById("colorSelector").classList.add('zoomIn');
         document.getElementById("colorSelector").open = true;
@@ -966,11 +1018,12 @@ function PageLoaded() {
 
 
     function PlayerAction(player, text) {
+        
         var element = document.getElementById("action-player" + player)
         let color = document.getElementById("tableCard").style.backgroundColor;
         if (text === "skip") {
-            element.innerHTML = "<img src='images/skip-icon-" + color + ".png' style='width: 80px;' />"
             soundSkip.play();
+            element.innerHTML = "<img src='images/skip-icon-" + color + ".png' style='width: 80px;' />"
         }
         else {
             if (color === "blue") { color = cardBlue }
