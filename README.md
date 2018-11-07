@@ -19,4 +19,4 @@ To use offline:
 - Clone/download repository to your computer
 - Open index.html.
 
-##### OBS.: Preferably on desktop (mobile works too, but elements are bigger due to resolution used)
+##### PS.: Preferably on desktop (mobile works too, but elements are bigger due to resolution used)
