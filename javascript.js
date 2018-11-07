@@ -1,27 +1,12 @@
-//window.onload = document.getElementById("menu").open = true;
-
 function PageLoaded() {
 
     //=============== DECLARATIONS ==================================================================================//
 
     window.onload = document.getElementById("titleScreen").open = true;
-    var cardID = 0;
-    function Card(id, color, value, element) {
-        this.id = id; this.color = color; this.value = value; this.element = element;
-    }
-    var cardClass = ["bottom", "left", "top", "right"];
+
     var cardValues = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "plus2", "plus4", "reverse", "skip", "wild"];
     var colors = ["blue", "green", "red", "yellow"];
-    var tableCard = { color: "", value: "", element: document.getElementById("tableCard") }
     var counter = 0;
-    //players
-    var player;
-    var startingPlayer = 1;
-    var player1win = 0;
-    var player2win = 0;
-    var player3win = 0;
-    var player4win = 0;
-
     var endGame = false;
     var plus2counter = 0;
     var plus4counter = 0;
@@ -29,15 +14,13 @@ function PageLoaded() {
     //Audios
     var soundCard = new Audio("sound/card-effect.mp3")
     var soundtrack = new Audio("sound/main-soundtrack.mp3")
-    var soundMenuHover = new Audio("sound/menu-select.mp3")
     var soundMenuSelection = new Audio("sound/menu-validate.mp3")
     var soundSkip = new Audio("sound/skip.wav")
     var soundReverse = new Audio("sound/reverse.wav")
     var soundVictory = new Audio("sound/victory.flac")
     var soundDraw = new Audio("sound/draw.mp3")
     var soundLose = new Audio("sound/lose.mp3")
-
-    //elements
+    //Elements
     var arrowLeft = document.querySelectorAll(".flow-indicator")[0]
     var arrowRight = document.querySelectorAll(".flow-indicator")[1]
     var indicatorPlayer1 = document.getElementById("player1-indicator")
@@ -45,12 +28,18 @@ function PageLoaded() {
     var indicatorPlayer3 = document.getElementById("player3-indicator")
     var indicatorPlayer4 = document.getElementById("player4-indicator")
     var btnPass = document.getElementById("btnPass")
-    //in game card colors
+    //In game card colors
     var cardBlue = "rgb(42, 127, 255)"
     var cardGreen = "rgb(44, 160, 90)"
     var cardRed = "rgb(212, 0, 0)"
     var cardYellow = "rgb(255, 204, 0)"
-
+    //Players
+    var player;
+    var startingPlayer = 1;
+    var player1win = 0;
+    var player2win = 0;
+    var player3win = 0;
+    var player4win = 0;
     var player1Name = document.getElementById("playerBottomLabel")
     var player2Name = document.getElementById("playerLeftLabel")
     var player3Name = document.getElementById("playerTopLabel")
@@ -110,7 +99,6 @@ function PageLoaded() {
     }
 
 
-
     function GetValueOfCard(card) {
         if (card.innerHTML === "1") { value = 1 }
         else if (card.innerHTML === "2") { value = 2 }
@@ -133,115 +121,79 @@ function PageLoaded() {
 
 
     function StartGame() {
-        var p1_0 = document.getElementById("player1-slot0");
-        var p1_1 = document.getElementById("player1-slot1");
-        var p1_2 = document.getElementById("player1-slot2");
-        var p1_3 = document.getElementById("player1-slot3");
-        var p1_4 = document.getElementById("player1-slot4");
-        var p1_5 = document.getElementById("player1-slot5");
-        var p1_6 = document.getElementById("player1-slot6");
-
-        var p2_0 = document.getElementById("player2-slot0");
-        var p2_1 = document.getElementById("player2-slot1");
-        var p2_2 = document.getElementById("player2-slot2");
-        var p2_3 = document.getElementById("player2-slot3");
-        var p2_4 = document.getElementById("player2-slot4");
-        var p2_5 = document.getElementById("player2-slot5");
-        var p2_6 = document.getElementById("player2-slot6");
-
-        var cpu_0 = document.getElementById("player3-slot0");
-        var cpu_1 = document.getElementById("player3-slot1");
-        var cpu_2 = document.getElementById("player3-slot2");
-        var cpu_3 = document.getElementById("player3-slot3");
-        var cpu_4 = document.getElementById("player3-slot4");
-        var cpu_5 = document.getElementById("player3-slot5");
-        var cpu_6 = document.getElementById("player3-slot6");
-
-        var p4_0 = document.getElementById("player4-slot0");
-        var p4_1 = document.getElementById("player4-slot1");
-        var p4_2 = document.getElementById("player4-slot2");
-        var p4_3 = document.getElementById("player4-slot3");
-        var p4_4 = document.getElementById("player4-slot4");
-        var p4_5 = document.getElementById("player4-slot5");
-        var p4_6 = document.getElementById("player4-slot6");
-
+        var p1_card0 = document.getElementById("player1-slot0"); var p3_card0 = document.getElementById("player3-slot0");
+        var p1_card1 = document.getElementById("player1-slot1"); var p3_card1 = document.getElementById("player3-slot1");
+        var p1_card2 = document.getElementById("player1-slot2"); var p3_card2 = document.getElementById("player3-slot2");
+        var p1_card3 = document.getElementById("player1-slot3"); var p3_card3 = document.getElementById("player3-slot3");
+        var p1_card4 = document.getElementById("player1-slot4"); var p3_card4 = document.getElementById("player3-slot4");
+        var p1_card5 = document.getElementById("player1-slot5"); var p3_card5 = document.getElementById("player3-slot5");
+        var p1_card6 = document.getElementById("player1-slot6"); var p3_card6 = document.getElementById("player3-slot6");
+        var p2_card0 = document.getElementById("player2-slot0"); var p4_card0 = document.getElementById("player4-slot0");
+        var p2_card1 = document.getElementById("player2-slot1"); var p4_card1 = document.getElementById("player4-slot1");
+        var p2_card2 = document.getElementById("player2-slot2"); var p4_card2 = document.getElementById("player4-slot2");
+        var p2_card3 = document.getElementById("player2-slot3"); var p4_card3 = document.getElementById("player4-slot3");
+        var p2_card4 = document.getElementById("player2-slot4"); var p4_card4 = document.getElementById("player4-slot4");
+        var p2_card5 = document.getElementById("player2-slot5"); var p4_card5 = document.getElementById("player4-slot5");
+        var p2_card6 = document.getElementById("player2-slot6"); var p4_card6 = document.getElementById("player4-slot6");
         var tc = document.getElementById("tableCard");
 
         document.getElementById("colorSelector").open = false
         document.getElementById("colorSelector").classList.remove('zoomIn');
         document.getElementById("colorSelector").classList.remove('zoomOut');
-        endGame = false;
+        endGame = false; player = startingPlayer; plus2counter = 0; plus4counter = 0;
 
-        debugger
+        EraseCard(tc);
         for (var x = 1; x <= 4; x++) {
             for (var y = 0; y < 20; y++) {
-                let card = document.getElementById("player" + x + "-slot" + y)
+                let card = document.getElementById("player" + x + "-slot" + y);
                 EraseCard(card);
             }
         }
-        EraseCard(tc);
 
-        setTimeout(function () { RenderizeCard(p2_5); RenderizeCard(p2_3); }, 200);
-        setTimeout(function () { RenderizeCard(p2_1); RenderizeCard(p2_0); }, 1200);
-        setTimeout(function () { RenderizeCard(p2_2); RenderizeCard(p2_4); }, 2200);
-        setTimeout(function () { RenderizeCard(p2_6); }, 3200);
-
-        setTimeout(function () { RenderizeCard(cpu_5); RenderizeCard(cpu_3); }, 450);
-        setTimeout(function () { RenderizeCard(cpu_1); RenderizeCard(cpu_0); }, 1450);
-        setTimeout(function () { RenderizeCard(cpu_2); RenderizeCard(cpu_4); }, 2450);
-        setTimeout(function () { RenderizeCard(cpu_6); }, 3450);
-
-        setTimeout(function () { RenderizeCard(p4_5); RenderizeCard(p4_3); }, 700);
-        setTimeout(function () { RenderizeCard(p4_1); RenderizeCard(p4_0); }, 1700);
-        setTimeout(function () { RenderizeCard(p4_2); RenderizeCard(p4_4); }, 2700);
-        setTimeout(function () { RenderizeCard(p4_6); }, 3700);
-
-        setTimeout(function () { RenderizeCard(p1_5); RenderizeCard(p1_3); }, 950);
-        setTimeout(function () { RenderizeCard(p1_1); RenderizeCard(p1_0); }, 1950);
-        setTimeout(function () { RenderizeCard(p1_2); RenderizeCard(p1_4); }, 2950);
-        setTimeout(function () { RenderizeCard(p1_6); }, 3950);
-
-        setTimeout(function () { RenderizeCard(tableCard.element); }, 5000);
+        setTimeout(function () { RenderizeCard(p2_card5); RenderizeCard(p2_card3); RenderizeCard(p2_card1); }, 250);
+        setTimeout(function () { RenderizeCard(p3_card5); RenderizeCard(p3_card3); RenderizeCard(p3_card1); }, 500);
+        setTimeout(function () { RenderizeCard(p4_card5); RenderizeCard(p4_card3); RenderizeCard(p4_card1); }, 750);
+        setTimeout(function () { RenderizeCard(p1_card5); RenderizeCard(p1_card3); RenderizeCard(p1_card1); }, 1000);
+        setTimeout(function () { RenderizeCard(p2_card0); RenderizeCard(p2_card2); }, 1250);
+        setTimeout(function () { RenderizeCard(p3_card0); RenderizeCard(p3_card2); }, 1500);
+        setTimeout(function () { RenderizeCard(p4_card0); RenderizeCard(p4_card2); }, 1750);
+        setTimeout(function () { RenderizeCard(p1_card0); RenderizeCard(p1_card2); }, 2000);
+        setTimeout(function () { RenderizeCard(p2_card4); RenderizeCard(p2_card6); }, 2250);
+        setTimeout(function () { RenderizeCard(p3_card4); RenderizeCard(p3_card6); }, 2500);
+        setTimeout(function () { RenderizeCard(p4_card4); RenderizeCard(p4_card6); }, 2750);
+        setTimeout(function () { RenderizeCard(p1_card4); RenderizeCard(p1_card6); }, 3000);
+        setTimeout(function () { RenderizeCard(tc); }, 4000);
 
         setTimeout(function () {
             arrowLeft.style.opacity = "0.15";
             arrowRight.style.opacity = "0.15";
             document.getElementById("btnUno").style.opacity = "1";
-        }, 5300);
+        }, 4300);
 
-        setTimeout(function () {
-            player = startingPlayer; plus2counter = 0; plus4counter = 0; CallPlayer(player);
-        }, 5600);
+
+        setTimeout(function () { CallPlayer(player); }, 4600);
     }
 
 
 
     function EndGame() {
-        
-        RemoveHighlight();
-        document.getElementById("layer").open = true;
         arrowLeft.style.opacity = "0"; arrowRight.style.opacity = "0";
-        indicatorPlayer1.style.visibility = "hidden";
-        indicatorPlayer2.style.visibility = "hidden";
-        indicatorPlayer3.style.visibility = "hidden";
-        indicatorPlayer4.style.visibility = "hidden";
+        indicatorPlayer1.style.visibility = "hidden"; indicatorPlayer2.style.visibility = "hidden";
+        indicatorPlayer3.style.visibility = "hidden"; indicatorPlayer4.style.visibility = "hidden";
 
-        if (player === 1){soundVictory.play();}
-        else {soundLose.play();}
+        RemoveHighlight();
+        if (player === 1) { soundVictory.play(); } else { soundLose.play(); }
 
-
-        debugger
-        var winner;
-        if (player === 1) { document.getElementById("menu").style.color = cardRed; player1win++; winner = player1Name.innerHTML }
-        else if (player === 2) { document.getElementById("menu").style.color = cardGreen; player2win++; winner = player2Name.innerHTML  }
-        else if (player === 3) { document.getElementById("menu").style.color = cardYellow; player3win++; winner = player3Name.innerHTML  }
-        else { document.getElementById("menu").style.color = cardBlue; player4win++; winner = player4Name.innerHTML  }
+        var winner; var endGameWindow = document.getElementById("menu");
+        if (player === 1) { endGameWindow.style.color = cardRed; player1win++; winner = player1Name.innerHTML }
+        else if (player === 2) { endGameWindow.style.color = cardGreen; player2win++; winner = player2Name.innerHTML }
+        else if (player === 3) { endGameWindow.style.color = cardYellow; player3win++; winner = player3Name.innerHTML }
+        else { endGameWindow.style.color = cardBlue; player4win++; winner = player4Name.innerHTML }
 
         var text = winner.toUpperCase() + " WON!";
         document.getElementById("endGameTitle").innerHTML = text;
-
-        document.getElementById("menu").open = true;
-        document.getElementById("menu").classList.add('zoomIn');
+        endGameWindow.open = true;
+        endGameWindow.classList.add('zoomIn');
 
         document.getElementById("playerBottom-counter").innerHTML = player1win;
         document.getElementById("playerLeft-counter").innerHTML = player2win;
@@ -258,7 +210,7 @@ function PageLoaded() {
         if (card.innerHTML === "plus4" || card.innerHTML === "wild") { cardColor = "black"; }
         else { cardColor = RandomColor(); }
         card.style.backgroundColor = cardColor;
-        card.style.boxShadow = "0px 3px 3px rgba(0, 0, 0, 0.8)";
+        card.style.boxShadow = "0px 3px 3px rgba(0, 0, 0, 1)";
         card.style.visibility = "visible";
         card.style.backgroundImage = GetImage(cardColor, card.innerHTML);
         DrawCardAnimation(card);
@@ -276,86 +228,35 @@ function PageLoaded() {
 
 
     
-    //not working yet
-    function NewRenderizeCard(card, player) {
-        if (card === tableCard) { card.value = RandomCardValue(10) }
-        else { card.value = RandomCardValue(15) }
-        if (card.value === "plus4" || card.value === "wild") { card.color = "black"; }
-        else { card.color = RandomColor(); }
-
-        let htmlCard = document.createElement("div");
-        htmlCard.setAttribute('class', 'card')
-        htmlCard.setAttribute('class', 'card-' + cardClass[player - 1])
-        htmlCard.setAttribute('id', 'card' + cardID)
-
-        card.id = "card" + cardID;
-
-
-        card.element = htmlCard;
-
-        cardID++;
-
-        htmlCard.style.backgroundColor = card.color;
-        htmlCard.style.boxShadow = "0px 3px 3px rgba(0, 0, 0, 0.8)";
-        htmlCard.style.visibility = "visible";
-        htmlCard.style.backgroundImage = GetImage(card.color, card.value);
-
-        document.querySelector(".card-container-" + player - 1).appendChild(htmlCard);
-        DrawCardAnimation(card);
-    }
-
-
-    //not working yet
-    function NewEraseCard(card) {
-        card.style.removeProperty('transition');
-        card.style.removeProperty('transform');
-        card.innerHTML = "";
-        card.style.backgroundColor = null;
-        card.style.backgroundImage = null;
-        card.style.visibility = "hidden";
-    }
-
-
-
-
-
 
     //=============== PLAYING ACTIONS ===============================================================================//
 
     function PlayerTurn() {
-        debugger
-        var canPlay = false;
-        document.getElementById("layer").open = true;
+        var canPlay = false; document.getElementById("layer").open = true;
+
         if (plus2counter !== 0 && plus4counter === 0) {
             for (x = 0; x < 20; x++) {
                 let card = document.getElementById("player" + player + "-slot" + x);
-                if (IsPlus2(card) || IsPlus4(card)) { canPlay = true; break; }
+                if (IsPlus2(card) || IsPlus4(card)) { canPlay = true; counter = 1; break; }
             }
         }
         else if (plus4counter !== 0) {
             for (x = 0; x < 20; x++) {
                 let card = document.getElementById("player" + player + "-slot" + x);
-                if (IsPlus4(card)) { canPlay = true; break; }
+                if (IsPlus4(card)) { canPlay = true; counter = 1; break; }
             }
         }
         else { canPlay = true; }
 
-        if (canPlay) {
-            if (player === 1) { document.getElementById("layer").open = false; HighlightPlayableCards(); }
-            else { setTimeout(CPUPlay, 1100) }
-        }
+        if (canPlay) { if (player === 1) { HighlightPlayableCards(); } else { setTimeout(CPUPlay, 1100) } }
         else {
             setTimeout(function () {
-                let draw = (plus2counter * 2) + (plus4counter * 4);
-                DrawCard(player, draw); plus4counter = 0; plus2counter = 0;
-                soundDraw.play();
-                PlayerAction(player, "+" + draw)    
-                CallNextPlayer();
-            }, 800)
-
+                let numberOfCards = (plus2counter * 2) + (plus4counter * 4);
+                DrawCard(numberOfCards); plus4counter = 0; plus2counter = 0; soundDraw.play();
+                PlayerAction(player, "+" + numberOfCards); CallNextPlayer();
+            }, 400)
         }
     }
-
 
 
     function Play(cardID) {
@@ -363,113 +264,22 @@ function PageLoaded() {
         if (IsPlayable(card)) { SetCard(card) } else { Hint("This card doesn't match!") };
     }
 
-    function CPUPlay() {
-        debugger
-        if (endGame === false) {
-            var canPlay = false; var card;
-            for (var x = 0; x < 20; x++) {
-                card = document.getElementById("player" + player + "-slot" + x);
-                if (IsPlayable(card)) { canPlay = true; break; }
-            }
-            if (canPlay) { CPUSetCard(card); }
-            else { DeckClick(); }
-        }
-    }
-
 
     function SetCard(card) {
-        counter = 0;
         btnPass.style.opacity = 0;
-        var tc = document.getElementById("tableCard");
-        tc.innerHTML = card.innerHTML;
-        tc.style.backgroundColor = card.style.backgroundColor;
         SetCardAnimation(card);
-
-        if (card.style.backgroundColor === "black") {
-            setTimeout(function () {
-                EraseCard(card);
-                ColorChooseMenu();
-            }, 500);
-        }
-        else {
-            counter = 0;
-            setTimeout(function () {
-                EraseCard(card)
-                if (Victory()) {
-                    endGame = true
-                    EndGame();
-                }
-                else {
-                    if (IsSkip(tc)) {
-                        ShowLabel("SKIP!")
-                        if (clockwiseFlow === true) { player = 2 }
-                        else (player = 4)
-                        PlayerAction(player, "skip")
-                    }
-                    if (IsReverse(tc)) {
-                        soundReverse.pause(); soundReverse.currentTime = 0; soundReverse.play();
-                        ReverseFlow(); RemoveHighlight(); ShowLabel("REVERSE!");
-                    }
-                    if (IsPlus2(tc)) { plus2counter++; }
-
-                    CallNextPlayer();
-                }
-            }, 500);
-        }
+        setTimeout(function () {
+            var tableCard = document.getElementById("tableCard");
+            if (Victory()) { endGame = true; EndGame(); }
+            else if (IsBlack(tableCard)) { ColorChooseMenu(); }
+            else { ContinueGame(); }
+        }, 500)
     }
 
-
-    function CPUSetCard(card) {
-        var tc = document.getElementById("tableCard");
-        tc.innerHTML = card.innerHTML;
-        tc.style.backgroundColor = card.style.backgroundColor;
-        SetCardAnimation(card);
-        //debugger
-        if (card.style.backgroundColor === "black") {
-            card.style.backgroundColor = CPUBlackCardColorSet();
-            tc.style.backgroundColor = card.style.backgroundColor;
-            setTimeout(function () {
-                tc.style.backgroundImage = GetImage(tc.style.backgroundColor, tc.innerHTML);
-                EraseCard(card)
-                if (Victory()) {
-                    endGame = true
-                    EndGame()
-                }
-                else {
-                    if (IsPlus4(tc)) { plus4counter++; }
-                    CallNextPlayer();
-                }
-            }, 500);
-        } else {
-            setTimeout(function () {
-                tc.style.backgroundImage = GetImage(tc.style.backgroundColor, tc.innerHTML);
-                EraseCard(card)
-                if (Victory()) {
-                    endGame = true
-                    EndGame()
-                }
-                else {
-                    if (IsSkip(tc)) {
-                        ShowLabel("SKIP!")
-                        if (clockwiseFlow === true) { if (player < 4) { player++ } else { player = 1 }; }
-                        else { if (player > 1) { player-- } else { player = 4 }; }
-                        PlayerAction(player, "skip")
-                    }
-                    if (IsReverse(tc)) {
-                        soundReverse.pause(); soundReverse.currentTime = 0; soundReverse.play();
-                        ReverseFlow(); ShowLabel("REVERSE!");
-                    }
-                    if (IsPlus2(tc)) { plus2counter++; }
-                    CallNextPlayer();
-                }
-            }, 500);
-        }
-    }
 
     function DeckClick() {
-        debugger
         if (counter === 0) {
-            DrawCard(player, 1);
+            DrawCard(1);
             if (HasPlayableCards()) {
                 if (player === 1) {
                     counter = 1; HighlightPlayableCards();
@@ -477,58 +287,62 @@ function PageLoaded() {
                 }
                 else { setTimeout(CPUPlay, 700) }
             }
-            else { CallNextPlayer() }
+            else { setTimeout(CallNextPlayer, 500) }
         }
-        else (Hint("You can only draw once."))
+        else (Hint("You can't draw."))
     }
 
-    function DrawCard(player, numberOfCards) {
-        debugger
-        if (counter === 0) {
-            let a = 1
-            do {
-                for (x = 0; x < 20; x++) {
-                    let card = document.getElementById("player" + player + "-slot" + x)
-                    if (IsEmptyCard(card)) { RenderizeCard(card); break; }
-                }
-                a++
-            } while (a <= numberOfCards)
-        }
-        if (numberOfCards === 1) {
 
-        }
+    function DrawCard(numberOfCards) {
+        let a = 1
+        do {
+            for (x = 0; x < 20; x++) {
+                let card = document.getElementById("player" + player + "-slot" + x)
+                if (IsEmptyCard(card)) { RenderizeCard(card); break; }
+            }
+            a++
+        } while (a <= numberOfCards)
     }
 
 
     function GetColor(e) {
+        var tc = document.getElementById("tableCard");
         let newColor = e.target.innerHTML;
-        var tc = document.getElementById("tableCard")
         tc.style.backgroundColor = newColor;
         tc.style.backgroundImage = GetImage(newColor, tc.innerHTML);
 
-        document.getElementById("colorSelector").classList.add('zoomOut');
-        setTimeout(CloseDialog, 300);
-        function CloseDialog() {
-            document.getElementById("colorSelector").open = false
-            document.getElementById("colorSelector").classList.remove('zoomIn');
-            document.getElementById("colorSelector").classList.remove('zoomOut');
-        }
-        if (Victory()) {
-            endGame = true
-            EndGame()
-        }
-        else {
-            if (IsPlus4(tc)) { plus4counter++; }
-            CallNextPlayer();
-        }
+        var menu = document.getElementById("colorSelector");
+        menu.classList.add('zoomOut');
+        setTimeout(function () {
+            menu.open = false;
+            menu.classList.remove('zoomIn');
+            menu.classList.remove('zoomOut');
+        }, 300);
+
         soundMenuSelection.play();
+        ContinueGame();
     }
 
 
+    function CPUPlay() {
+        if (endGame === false) {
+            var canPlay = false; var card;
+            for (var x = 0; x < 20; x++) {
+                card = document.getElementById("player" + player + "-slot" + x);
+                if (IsPlayable(card)) { canPlay = true; break; }
+            }
+            if (canPlay) { CPUSetCard(card); } else { DeckClick(); }
+        }
+    }
 
-
-
-
+    function CPUSetCard(card) {
+        if (IsBlack(card)) { card.style.backgroundColor = CPUBlackCardColorSet(); }
+        SetCardAnimation(card);
+        setTimeout(function () {
+            if (Victory()) { endGame = true; EndGame() }
+            else { ContinueGame(); }
+        }, 500);
+    }
 
     function CPUBlackCardColorSet() {
         var newColor = RandomColor();
@@ -538,7 +352,6 @@ function PageLoaded() {
         }
         return newColor;
     }
-
 
 
 
@@ -568,23 +381,37 @@ function PageLoaded() {
         if (clockwiseFlow) { clockwiseFlow = false }
         else { clockwiseFlow = true }
 
-        if (clockwiseFlow) {
-            arrowLeft.style.setProperty("transform", "rotateX(0deg)")
-            arrowRight.style.setProperty("transform", "rotateX(0deg)")
-        }
-        else {
-            arrowLeft.style.setProperty("transform", "rotateX(180deg)")
-            arrowRight.style.setProperty("transform", "rotateX(180deg)")
-        }
+        var rotateX;
+        if (clockwiseFlow) { rotateX = "rotateX(0deg)" }
+        else { rotateX = "rotateX(180deg)" }
+
+        arrowLeft.style.opacity = "1";
+        arrowRight.style.opacity = "1";
+
+        setTimeout(function () {
+            arrowLeft.style.setProperty("transform", rotateX)
+            arrowRight.style.setProperty("transform", rotateX)
+
+            setTimeout(function () {
+                arrowLeft.style.opacity = "0.15";
+                arrowRight.style.opacity = "0.15";
+            }, 800)
+        }, 100)
+
+        soundReverse.pause(); soundReverse.currentTime = 0; soundReverse.play();
+        ShowLabel("REVERSE!");
+    }
+
+    function SkipNextPlayer() {
+        if (clockwiseFlow === true) { if (player < 4) { player++ } else { player = 1 }; }
+        else { if (player > 1) { player-- } else { player = 4 }; }
+        PlayerAction(player, "skip")
+        ShowLabel("SKIP!")
     }
 
     function CallNextPlayer() {
-        if (clockwiseFlow) {
-            if (player < 4) { player++ } else { player = 1 }
-        }
-        else {
-            if (player > 1) { player-- } else { player = 4 }
-        }
+        if (clockwiseFlow) { if (player < 4) { player++ } else { player = 1 } }
+        else { if (player > 1) { player-- } else { player = 4 } }
         counter = 0;
         CallPlayer(player);
     }
@@ -612,22 +439,21 @@ function PageLoaded() {
         if (victory) { return true } else { return false }
     }
 
+    function ContinueGame() {
+        var tableCard = document.getElementById("tableCard");
+        if (IsSkip(tableCard)) { SkipNextPlayer(); }
+        if (IsReverse(tableCard)) { ReverseFlow(); }
+        if (IsPlus2(tableCard)) { plus2counter++; }
+        if (IsPlus4(tableCard)) { plus4counter++; }
+        RemoveHighlight();
+        CallNextPlayer();
+    }
+
+
+
 
     //=============== CARDS TESTING ================================================================================//
 
-
-    function ContainsClass(card, className) {
-        if (card.classList.contains(className)) { return true } else { return false }
-    }
-
-    function IsTableCard(card) {
-        var tc = document.getElementById("tableCard");
-        if (card === tc) {
-            return true
-        } else {
-            return false
-        }
-    }
 
     function IsPlayable(card) {
         if (plus2counter === 0 && plus4counter === 0) {
@@ -653,14 +479,12 @@ function PageLoaded() {
         }
     }
 
+    function IsTableCard(card) { if (card === document.getElementById("tableCard")) { return true } else { return false } }
     function IsReverse(card) { if (card.innerHTML === "reverse") { return true } else { return false } }
-
     function IsSkip(card) { if (card.innerHTML === "skip") { return true } else { return false } }
-
     function IsPlus2(card) { if (card.innerHTML === "plus2") { return true } else { return false } }
-
     function IsPlus4(card) { if (card.innerHTML === "plus4") { return true } else { return false } }
-
+    function IsBlack(card) { if (card.style.backgroundColor === "black") { return true } else { return false } }
     function IsEmptyCard(card) { if (card.innerHTML === "") { return true } else { return false } }
 
     function HasPlayableCards() {
@@ -669,15 +493,12 @@ function PageLoaded() {
             let card = document.getElementById("player" + player + "-slot" + x)
             if (IsPlayable(card)) { canPlay = true; break }
         }
-        if (canPlay) { return true }
-        else { return false }
+        if (canPlay) { return true } else { return false }
     }
 
-
-
-
-
-
+    function ContainsClass(card, className) {
+        if (card.classList.contains(className)) { return true } else { return false }
+    }
 
 
 
@@ -688,11 +509,11 @@ function PageLoaded() {
 
     //Play Game Button
     document.getElementById("btnPlayGame").addEventListener("click", function () {
-        document.getElementById("titleScreen").classList.add('bounceOut');
+        document.getElementById("titleScreen").classList.add('zoomOut');
         setTimeout(function () {
             document.getElementById("titleScreen").style.visibility = "hidden";
             document.getElementById("titleScreen").classList.remove('bounceIn');
-            document.getElementById("titleScreen").classList.remove('bounceOut');
+            document.getElementById("titleScreen").classList.remove('zoomOut');
             document.getElementById('deck').style.visibility = "visible"
             document.getElementById('deck').classList.add("rollIn")
         }, 800);
@@ -709,8 +530,7 @@ function PageLoaded() {
     //Play Music Button
     document.getElementById("playMusic").addEventListener("click", function () {
         if (soundtrack.paused) {
-            soundtrack.play();
-            soundtrack.loop = true;
+            soundtrack.play(); soundtrack.loop = true;
             document.getElementById("playMusic").innerHTML = "Music: on";
             document.getElementById("optPlayMusic").innerHTML = "Music: on";
         }
@@ -724,8 +544,7 @@ function PageLoaded() {
 
     document.getElementById("optPlayMusic").addEventListener("click", function () {
         if (soundtrack.paused) {
-            soundtrack.play();
-            soundtrack.loop = true;
+            soundtrack.play(); soundtrack.loop = true;
             document.getElementById("optPlayMusic").innerHTML = "Music: on";
         }
         else {
@@ -777,7 +596,12 @@ function PageLoaded() {
         indicatorPlayer2.style.visibility = "hidden";
         indicatorPlayer3.style.visibility = "hidden";
         indicatorPlayer4.style.visibility = "hidden";
-        if (!clockwiseFlow) { ReverseFlow() }
+
+        if (!clockwiseFlow) { 
+            clockwiseFlow = true;
+            arrowLeft.style.removeProperty("transform")
+            arrowRight.style.removeProperty("transform")
+         }
 
         setTimeout(function () {
             document.getElementById("menu").open = false
@@ -785,15 +609,12 @@ function PageLoaded() {
             document.getElementById("menu").classList.remove('zoomOut');
         }, 300);
 
-
-
         if (startingPlayer < 4) { startingPlayer++; }
         else { startingPlayer = 1; }
         player = startingPlayer;
 
         setTimeout(StartGame, 700)
     })
-
 
 
     //Color Selection Buttons
@@ -838,7 +659,6 @@ function PageLoaded() {
 
     document.getElementById('deck').addEventListener("click", DeckClick)
 
-
     //Uno Button
     document.getElementById("btnUno").addEventListener("click", function () {
         Hint("This don't work yet!")
@@ -854,12 +674,7 @@ function PageLoaded() {
 
 
 
-
-
-
-
     //=============== ANIMATIONS ===================================================================================//
-
 
     function SetCardAnimation(card) {
         var tcPosition = document.getElementById("tableCard").getBoundingClientRect();
@@ -902,12 +717,14 @@ function PageLoaded() {
 
         setTimeout(function () {
             var tc = document.getElementById("tableCard")
+            tc.innerHTML = card.innerHTML;
+            tc.style.backgroundColor = card.style.backgroundColor;
             tc.style.backgroundImage = GetImage(tc.style.backgroundColor, tc.innerHTML)
+            EraseCard(card);
         }, 500)
 
         soundCard.play();
     }
-
 
 
     function DrawCardAnimation(card) {
@@ -940,11 +757,11 @@ function PageLoaded() {
                 card.style.setProperty('transition', 'transform 0.4s');
                 card.style.setProperty('transform', 'rotateY(0deg)');
             }, 10)
-            setTimeout(function () { card.style.backgroundImage = GetImage(card.style.backgroundColor, card.innerHTML) }, 150);
+            setTimeout(function () { card.style.backgroundImage = GetImage(card.style.backgroundColor, card.innerHTML) }, 140);
             setTimeout(function () {
                 card.style.removeProperty('transform');
                 card.style.setProperty('transition', 'transform 0.15s');
-            }, 400)
+            }, 510)
         }
         else if (ContainsClass(card, "card-left")) {
             card.style.setProperty('transform', 'translate(' + moveX + 'px, ' + moveY + 'px) scale( 1.299 )');
@@ -953,7 +770,6 @@ function PageLoaded() {
                 card.style.setProperty('transition', 'transform 0.4s');
                 card.style.removeProperty('transform');
             }, 10)
-            setTimeout(function () { card.style.setProperty('transition', 'transform 0.15s'); }, 400)
         }
         else if (ContainsClass(card, "card-right")) {
             card.style.setProperty('transform', 'translate(' + moveX + 'px, ' + moveY + 'px) scale( 1.299 )');
@@ -962,7 +778,6 @@ function PageLoaded() {
                 card.style.setProperty('transition', 'transform 0.4s');
                 card.style.removeProperty('transform');
             }, 10)
-            setTimeout(function () { card.style.setProperty('transition', 'transform 0.15s'); }, 400)
         }
         else {
             card.style.setProperty('transform', 'translate(' + moveX + 'px, ' + moveY + 'px) scale( 1.299 )');
@@ -972,7 +787,6 @@ function PageLoaded() {
                 card.style.setProperty('transform', 'rotateY(180deg) rotateZ(180deg)');
             }, 10)
             setTimeout(function () { card.style.backgroundImage = "url('cards/back-inverse.png')"; }, 140);
-            setTimeout(function () { card.style.setProperty('transition', 'transform 0.15s'); }, 400)
         }
         soundCard.play();
     }
@@ -984,22 +798,19 @@ function PageLoaded() {
             ChangeBrightness(card);
         }
         function ChangeBrightness(card) {
-            if (IsPlayable(card)) { card.style.filter = "brightness(100%)" }
+            if (IsPlayable(card)) { card.style.filter = "brightness(100%)"; card.classList.add("playable") }
             else { card.style.filter = "brightness(60%)"; }
         }
         document.getElementById("layer").open = false;
     }
 
-    function HighlightMouseOver() { card.style.setProperty('transform', 'translateY(-20px)'); }
-    function HighlightMouseOut() { card.style.setProperty('transform', 'translateY(-10px)'); }
-
     function RemoveHighlight() {
-        document.getElementById("layer").open = true;
         var cards = document.querySelectorAll(".card-bottom");
         for (var x = 0; x < cards.length; x++) { BackToNormalState(cards[x]); }
         function BackToNormalState(card) {
-            card.style.filter = "initial"; //card.style.setProperty('transform', 'initial');
+            card.style.filter = "initial"; card.classList.remove("playable");
         }
+        document.getElementById("layer").open = true;
     }
 
     function Hint(message) {
@@ -1018,7 +829,6 @@ function PageLoaded() {
 
 
     function PlayerAction(player, text) {
-        
         var element = document.getElementById("action-player" + player)
         let color = document.getElementById("tableCard").style.backgroundColor;
         if (text === "skip") {
