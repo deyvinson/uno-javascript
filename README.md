@@ -1,3 +1,5 @@
+![](https://github.com/deyvinson/uno-javascript/blob/master/images/-example.gif)
+
 ### Description
 UNO game made entirely using javascript!
 You can play the demo [HERE](http://play-uno.000webhostapp.com/). 
