@@ -227,7 +227,7 @@ function PageLoaded() {
     }
 
 
-    
+
 
     //=============== PLAYING ACTIONS ===============================================================================//
 
@@ -515,10 +515,10 @@ function PageLoaded() {
             document.getElementById("titleScreen").classList.remove('bounceIn');
             document.getElementById("titleScreen").classList.remove('zoomOut');
             document.getElementById('deck').style.visibility = "visible"
-            document.getElementById('deck').classList.add("rollIn")
+            document.getElementById('deck').classList.add("flipInY")
         }, 800);
         setTimeout(function () {
-            document.getElementById("deck").classList.remove('rollIn');
+            document.getElementById("deck").classList.remove('flipInY');
             FirstToPlay();
         }, 1600);
         setTimeout(StartGame, 4000);
