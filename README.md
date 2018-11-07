@@ -6,6 +6,8 @@ In this game you play against 3 CPU opponents. The detailed rules can be viewed 
 
 I made this game for end work of my Course, and used as a base [this code](https://code.sololearn.com/W87BXhQSl8Sv/#html). I worked really hard to improve it, as it barely resembles the initial. 
 
+
+
 ### How-to-Use (What you need)
 - Internet access (obviously)
 - Google Chrome Installed (I tryed on other browsers, but the elements don't work properly. So, use Chrome!)
