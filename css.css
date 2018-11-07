@@ -59,6 +59,8 @@ dialog {
 
 .card-container-top {
     margin-top: -15px;
+    width: 75%;
+    /*height: 14.6%;*/
 }
 
 .card-container-bottom {
@@ -160,7 +162,7 @@ dialog {
 }
 
 .score {
-    position: fixed;
+    position: absolute;
     float: left;
     color: rgba(255, 255, 255, 0.63);
     font-size: 14px;
@@ -447,8 +449,7 @@ button:focus {
 }
 
 .unoButton:hover{
-    background-color: #ed151f;
-    transform: scale(1.1)
+    background-color: #f0303a;
 }
 
 .unoButton:active{
@@ -480,7 +481,7 @@ button:focus {
 
 #btnPass{
     float: left;
-    position: fixed;
+    position: absolute;
     margin: 403px 0px 0px -510px;
     width: 70px;
     font-size: 15px;
