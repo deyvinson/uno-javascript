@@ -452,32 +452,42 @@ function PageLoaded() {
 
 
 
-    //=============== CARDS TESTING ================================================================================//
 
+
+
+    //=============== CARDS TESTING ================================================================================//
 
     function IsPlayable(card) {
         if (plus2counter === 0 && plus4counter === 0) {
             let tc = document.getElementById("tableCard")
-            if (card.style.backgroundColor === tc.style.backgroundColor ||
-                card.innerHTML === tc.innerHTML ||
-                card.style.backgroundColor === "black")
-                return true;
-            else
-                return false;
+
+            if (IsWild(card)) {
+                if (player === 1) { return true }
+                else {
+                    var canPlay = true; for (x = 0; x < 20; x++) {
+                        let c = document.getElementById("player" + player + "-slot" + x);
+                        if (c.style.backgroundColor === tc.style.backgroundColor ||
+                            card.innerHTML === tc.innerHTML) { canPlay = false; break; }
+                    } if (canPlay) { return true } else { return false }
+                }
+            }
+            else if (IsPlus4(card)) {
+                var canPlay = true; for (x = 0; x < 20; x++) {
+                    let c = document.getElementById("player" + player + "-slot" + x);
+                    if (c.style.backgroundColor === tc.style.backgroundColor) { canPlay = false; break; }
+                } if (canPlay) { return true } else { return false }
+            }
+            else {
+                if (card.style.backgroundColor === tc.style.backgroundColor ||
+                    card.innerHTML === tc.innerHTML) { return true } else { return false }
+            }
         }
         else if (plus2counter !== 0 && plus4counter === 0) {
-            if (IsPlus2(card) || IsPlus4(card))
-                return true;
-            else
-                return false;
+            if (IsPlus2(card) || IsPlus4(card)) { return true } else { return false }
         }
-        else {
-            if (IsPlus4(card))
-                return true;
-            else
-                return false;
-        }
+        else { if (IsPlus4(card)) { return true } else { return false } }
     }
+
 
     function IsTableCard(card) { if (card === document.getElementById("tableCard")) { return true } else { return false } }
     function IsReverse(card) { if (card.innerHTML === "reverse") { return true } else { return false } }
@@ -486,6 +496,7 @@ function PageLoaded() {
     function IsPlus4(card) { if (card.innerHTML === "plus4") { return true } else { return false } }
     function IsBlack(card) { if (card.style.backgroundColor === "black") { return true } else { return false } }
     function IsEmptyCard(card) { if (card.innerHTML === "") { return true } else { return false } }
+    function IsWild(card) { if (card.innerHTML === "wild") { return true } else { return false } }
 
     function HasPlayableCards() {
         var canPlay = false;
@@ -597,11 +608,11 @@ function PageLoaded() {
         indicatorPlayer3.style.visibility = "hidden";
         indicatorPlayer4.style.visibility = "hidden";
 
-        if (!clockwiseFlow) { 
+        if (!clockwiseFlow) {
             clockwiseFlow = true;
             arrowLeft.style.removeProperty("transform")
             arrowRight.style.removeProperty("transform")
-         }
+        }
 
         setTimeout(function () {
             document.getElementById("menu").open = false
@@ -730,20 +741,10 @@ function PageLoaded() {
     function DrawCardAnimation(card) {
         var deckPosition = document.getElementById("deck").getBoundingClientRect();
         var cardPosition = card.getBoundingClientRect();
-        var dec_x;
-        var dec_y;
-        if (ContainsClass(card, "card-bottom")) {
-            deck_x = deckPosition.x + 10;
-            deck_y = deckPosition.y + 14;
-        }
-        else if (IsTableCard(card)) {
-            deck_x = deckPosition.x + 1;
-            deck_y = deckPosition.y;
-        }
-        else {
-            deck_x = deckPosition.x + 10;
-            deck_y = deckPosition.y + 14;
-        }
+        var dec_x; var dec_y;
+        if (ContainsClass(card, "card-bottom")) { deck_x = deckPosition.x + 10; deck_y = deckPosition.y + 14; }
+        else if (IsTableCard(card)) { deck_x = deckPosition.x + 1; deck_y = deckPosition.y; }
+        else { deck_x = deckPosition.x + 10; deck_y = deckPosition.y + 14; }
         var moveX = deck_x - cardPosition.x;
         var moveY = deck_y - cardPosition.y;
 
@@ -866,7 +867,6 @@ function PageLoaded() {
         label.innerHTML = text;
         label.style.visibility = "visible";
         label.classList.add("flipInX");
-
 
         setTimeout(function () { label.classList.add("flipOutX"); }, 800)
         setTimeout(function () {
