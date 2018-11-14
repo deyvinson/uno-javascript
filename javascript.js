@@ -100,21 +100,9 @@ function PageLoaded() {
 
 
     function GetValueOfCard(card) {
-        if (card.innerHTML === "1") { value = 1 }
-        else if (card.innerHTML === "2") { value = 2 }
-        else if (card.innerHTML === "3") { value = 3 }
-        else if (card.innerHTML === "4") { value = 4 }
-        else if (card.innerHTML === "5") { value = 5 }
-        else if (card.innerHTML === "6") { value = 6 }
-        else if (card.innerHTML === "7") { value = 7 }
-        else if (card.innerHTML === "8") { value = 8 }
-        else if (card.innerHTML === "9") { value = 9 }
-        else if (card.innerHTML === "plus2") { value = 10 }
-        else if (card.innerHTML === "skip") { value = 10 }
-        else if (card.innerHTML === "reverse") { value = 10 }
-        else if (card.innerHTML === "plus4") { value = 11 }
-        else if (card.innerHTML === "wild") { value = 11 }
-        else { value = 0 }
+        if (IsBlack(card)) { value = 11 }
+        else if (IsReverse(card) || IsSkip(card) || IsPlus2(card)) { value = 10 }
+        else { value = Number(card.innerHTML) }
         return value;
     }
 
